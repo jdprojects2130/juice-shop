@@ -9,6 +9,7 @@ jobs:
       - image: 'cimg/node:lts'
     steps:
       - checkout
+      - run: ls
       - run: npm i
       - snyk/scan
 workflows: null
