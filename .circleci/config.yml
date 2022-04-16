@@ -7,23 +7,7 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build_and_test: # this can be any name you choose
-    docker:
-      - image: cimg/node:17.2.0
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          command: npm run test
-          name: Run tests
-      - run:
-          command: npm run build
-          name: Build app
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
+ 
 
   example-job:
     docker:
@@ -31,13 +15,13 @@ jobs:
       - image: cimg/base:stable
     working_directory: .
     steps:
-      - run: 
-          command: ls
-      #- snyk/scan
+      - checkout
+      - run: npm ci
+      - snyk/scan
+      
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - build_and_test
       - example-job
