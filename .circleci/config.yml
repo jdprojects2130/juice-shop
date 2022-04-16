@@ -33,7 +33,7 @@ jobs:
     steps:
       - run: 
           command: ls
-      - snyk/scan
+      #- snyk/scan
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
